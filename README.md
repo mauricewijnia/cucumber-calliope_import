@@ -22,7 +22,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+CalliopeImport uses environment variables of a test run to make an API call with the test results.
+You can set those variables and call the formatter like this:
+
+    $ cucumber API_KEY='API Key Here' PROFILE_ID='Profile_ID Here' -f calliope_import
 
 ## Development
 
