@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{This gem adds a 'calliope-import' formatter to cucumber that uploads cucumber json output to the calliope.pro platform.}
   spec.description   = %q{CalliopeImport uses environment variables of a test run to make an API call with the test results.
-                          See the documentation for }
+                          See the documentation for more information.}
   spec.homepage      = "https://github.com/mauricewijnia/cucumber-calliope_import"
   spec.license       = "MIT"
 
