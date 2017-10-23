@@ -1,4 +1,5 @@
 require 'cucumber/formatter/json'
+require 'net/http'
 
 module Cucumber
   module CalliopeImporter
