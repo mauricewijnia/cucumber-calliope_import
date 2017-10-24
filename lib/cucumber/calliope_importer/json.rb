@@ -31,11 +31,14 @@ module Cucumber
       end
 
       def upload_to_api(results)
+        print "\nUploading to Calliope.pro"
         # Get metadata from test run
-        metadata = JSON.parse(File.read('./storage/metadata.json'))
-        @calliope_config['browser'] = metadata['browser']['name']
-        @calliope_config['os'] = metadata['browser']['platform']
+        @calliope_config['browser'] = ENV['BROWSER_VERSION'] || ENV['BROWSER'] || nil
+        @calliope_config['os'] = RUBY_PLATFORM
         # Set url
+        if @calliope_config['browser'].nil?
+          print "\n[Optional] Could not determine browser and browser version, set ENV['BROWSER_VERSION'] in env.rb to manually set them."
+        end
         api_call(results)
       end
 
@@ -56,7 +59,7 @@ module Cucumber
         request = Net::HTTP::Post.new(url, header)
         request.body = results
         response = http.request(request)
-        print "\nAPI response: #{response.body} \n"
+        print "\nAPI response: #{response.body} \n\n"
       end
 
       def check_profile_permission
