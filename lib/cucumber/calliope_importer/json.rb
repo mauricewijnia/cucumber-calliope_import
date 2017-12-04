@@ -9,7 +9,7 @@ module Cucumber
         if ENV['API_KEY'].nil? || ENV['PROFILE_ID'].nil?
           error = "API Key and/or Profile ID were not set. Please provide them in your cucumber call or profile like this API_KEY='API Key Here' PROFILE_ID='Profile ID Here'"
           print_error(error)
-          exit
+          exit 1
         end
         #Set calliope data
         @calliope_config = {
