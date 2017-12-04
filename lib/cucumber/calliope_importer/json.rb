@@ -81,7 +81,7 @@ module Cucumber
         if response.code != '200'
           error = 'Not authorized for this calliope profile, exiting...'
           print_error(error)
-          exit
+          exit 1
         end
       end
 
