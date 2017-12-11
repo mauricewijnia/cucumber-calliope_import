@@ -19,7 +19,7 @@ module Cucumber
         if ENV['API_URL']
           @calliope_config['url'] = ENV['API_URL']
         else
-          @calliope_config['url'] = 'https://app.calliope/pro'
+          @calliope_config['url'] = 'https://app.calliope.pro'
         end
         check_profile_permission
       end
