@@ -27,9 +27,9 @@ In order to use the calliope_import formatter we first have to require it in our
 CalliopeImport uses environment variables of a test run to make an API call with the test results.
 You can set those variables and call the formatter like this:
 
-    $ cucumber API_KEY='API Key Here' PROFILE_ID='Profile_ID Here' -f calliope_import
+    $ cucumber API_KEY=<API Key Here> PROFILE_ID=<Profile_ID Here> -f calliope_import
 
-The API url defaults to 'https://app.calliope.pro' this can be changed with the environment variable API_URL='API Url Here'
+The API url defaults to 'https://app.calliope.pro' this can be changed with the environment variable API_URL=<API Url Here>
 
 ## Development
 
