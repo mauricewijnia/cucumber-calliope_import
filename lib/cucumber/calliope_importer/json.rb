@@ -33,18 +33,22 @@ module Cucumber
       def upload_to_api(results)
         print "\nUploading to Calliope.pro"
         # Get metadata from test run
-        @calliope_config['browser'] = ENV['BROWSER_VERSION'] || ENV['BROWSER'] || nil
-        @calliope_config['os'] = RUBY_PLATFORM
+        @calliope_config['os'] = ENV['TA_OS'] || RUBY_PLATFORM
+        @calliope_config['platform'] = ENV['TA_PLATFORM'] || nil
+        @calliope_config['build'] = ENV['TA_BUILD'] || nil
         # Set url
-        if @calliope_config['browser'].nil?
-          print "\n[Optional] Could not determine browser and browser version, set ENV['BROWSER_VERSION'] in env.rb to manually set them."
+        if @calliope_config['platform'].nil?
+          print "\n[Optional] Could not determine a platform, set ENV['TA_PLATFORM'] in env.rb to manually set the platform."
+        end
+        if @calliope_config['build'].nil?
+          print "\n[Optional] Could not determine build version, set ENV['TA_BUILD'] in env.rb to manually set the build version."
         end
         api_call(results)
       end
 
       def api_call(results)
         # Make API call
-        url = "#{@calliope_config['url']}/api/v2/profile/#{@calliope_config['profile_id']}/testresult?browser=#{@calliope_config['browser']}&os=#{@calliope_config['os']}"
+        url = "#{@calliope_config['url']}/api/v2/profile/#{@calliope_config['profile_id']}/testresult?os=#{@calliope_config['os']}&platform=#{@calliope_config['platform']}&build=#{@calliope_config['build']}"
         url = URI.parse(url)
         http = Net::HTTP.new(url.host, url.port)
         # Enable ssl when necessary
@@ -77,6 +81,8 @@ module Cucumber
         }
         request = Net::HTTP::Get.new(url, header)
         response = http.request(request)
+
+        p "API Response: #{response.body}"
 
         if response.code != '200'
           error = 'Not authorized for this calliope profile, exiting...'
